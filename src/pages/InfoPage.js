@@ -54,13 +54,13 @@ const InfoPage = (props) => {
 
             <Row xs="1" sm="2" md="2" lg="2">
                 <Col style={box3}>
-                    <p style={{ fontSize: "2.5em", fontWeight: 900 }}>Develop Your<br></br> Self-Care Plan.<br></br> Self-care isn't a<br></br> one-size-fits-all strategy.</p>
-                    <p style={{ fontSize: "1em", fontWeight: 900 }}>For many people, self-care is an afterthought, but we believe that self-care is the foundation upon which all healthy habits are built.<br></br><br></br> Self-care means protecting your mental and emotional health, fostering joy in your life, and giving yourself permission to make yourself a priority.</p>
+                    <p style={{ fontSize: "2.5em", fontWeight: 900 }}>Develop Your<br></br> Self-Care Plan.</p>
+                    <p style={{ fontSize: "1em", fontWeight: 900 }}>Self-care isn't a<br></br> one-size-fits-all strategy.</p>
 
                     {/* <h1 style={{ fontSize: "3.5em", fontWeight: 900 }}>This is your<br></br> personalised<br></br> Self-Care app</h1> */}
 
                 </Col>
-                <Col style={box4}>Column 4
+                <Col style={box4}>
                     <h1 style={{ fontSize: "3.5em", fontWeight: 900 }}>This is your<br></br> personalised<br></br> Self-Care app</h1>
                 </Col>
             </Row>
