@@ -1,0 +1,232 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#root, .app{
+  height: 100%;
+}
+
+.app, .main{
+  display: flex;
+  position: relative;
+  width:100%
+}
+
+.prosider-bar{
+  height: 0% !important;
+}
+
+.content{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.link-decor, .link-decor:hover, .link-decor:focus, .link-decor:active {
+      text-decoration: none;
+      color: inherit;
+}
+
+.top-bar {
+  padding: 3px 0;
+  background-color: #72CEC1;
+  font-size: 14px;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 35px;
+}
+
+.top-bar .container {
+  z-index: 101;
+}
+
+.container {
+  position:relative;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* .top-bar-text {
+  color: #ffffff;
+  font-weight: 400;
+  text-align: left;
+  display: inline-block;
+} */
+
+
+
+.link-state:visited {
+  color: black
+}
+
+.link-state:hover {
+  color: #B12341
+}
+
+.box{
+  padding: 10vw;
+  height: 100vh;
+  color: black;
+}
+
+.jumbobox{
+  padding: 10vw;
+  width: 100%;
+  color: #FFFFFF;
+}
+
+.home-background{
+  height:100vh;
+  background-color:beige;
+  position: relative;
+}
+
+.info-background{
+  height:100vh;
+  background-color:beige;
+  position: relative;
+}
+
+/******* HOMEPAGE BUTTONS **********/
+.btn-container{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 100%;
+}
+
+.btn-container button{
+  padding: 20px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left;
+  border-radius: 50%;
+}
+
+@keyframes btnAnimation {
+  from {
+    opacity: 0.3;
+    transform:scale(1.0) translateY(0%);
+  }
+  to{
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+    opacity: 1;
+    transform:scale(1.2) translateY(-10%);
+  }
+} 
+
+.btn-container button:hover{
+  -webkit-animation: btnAnimation 0.3s linear;
+	-moz-animation: btnAnimation 0.3s linear;
+  animation: btnAnimation 0.3s linear;
+  
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+  opacity: 1;
+  transform:scale(1.2) translateY(-10%);
+}
+
+@-webkit-keyframes sonarEffect {
+	0% {
+    opacity: 0.3;
+    -webkit-transform: scale(1);
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+		-webkit-transform: scale(1.5);
+		opacity: 1;
+	}
+}
+@-moz-keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+		-moz-transform: scale(1.5);
+		opacity: 1;
+	}
+}
+@keyframes sonarEffect {
+	0% {
+		opacity: 0.3;
+	}
+	40% {
+		opacity: 0.5;
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+	}
+	100% {
+		box-shadow: 0 0 0 2px rgba(255,255,255,0.1), 0 0 10px 10px #3851bc, 0 0 0 10px rgba(255,255,255,0.5);
+		transform: scale(1.5);
+		opacity: 1;
+	}
+}
+
+/******* HOMEPAGE BUTTONS **********/
+
+
+
+ /* --- Supposedly this is the solution to my CSS struggle with the sidenav not being able to display proportionately. This has been resolved with another method --- */
+/* .page {
+  display: grid;
+  grid-template-columns: 20vw auto;
+}
+.sidebar {
+  position: fixed;
+  width: 20vw;
+  background: red;
+}
+.main {
+  grid-column-start: 2;
+  background: pink;
+} */
+
+
+
