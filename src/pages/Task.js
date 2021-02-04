@@ -1,25 +1,38 @@
-import React from 'react';
-import { Col, Row } from 'reactstrap';
+import React, { useState } from 'react';
+import { Col, Row, Container } from 'reactstrap';
 import { FcTodoList } from "react-icons/fc";
+import {
+    Form,
+    FormGroup,
+    Label,
+    Input,
+    Button
+} from 'reactstrap';
 
 
 const Task = () => {
 
-    const box1 = {
-        backgroundColor: '#312C51',
-        padding: "10vw",
-        width: "100vw",
-        height: "100vh",
-        color: "#FFFFFF",
-    };
+    const [tasks, setTasks] = useState([]);
 
     return (
         <div className="content">
-            <Row>
-                <Col style={box1}>
-                    <FcTodoList size="100" /><h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Task</h1>
-                </Col>
-            </Row>
+            <div className="home-background">
+                <Container fluid={true}>
+                    <Row className="no-gutter">
+                        <Col>
+                            <FcTodoList size="100" /><h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Task</h1>
+                            <Form>
+                                <FormGroup>
+                                    <Input placeholder="Add a task" />
+                                </FormGroup>
+                                <Button color="primary">Add</Button>{' '}
+                            </Form>
+                        </Col>
+                    </Row>
+
+
+                </Container>
+            </div>
         </div>
 
     )
