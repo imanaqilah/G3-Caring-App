@@ -3,8 +3,28 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import { FaGem, FaHeart, FaChevronLeft } from 'react-icons/fa';
 import { Col } from 'reactstrap';
 import { Link } from "react-router-dom";
+import { NavLink } from 'reactstrap';
+import { toast } from 'react-toastify'
+import { useHistory } from 'react-router-dom';
 
-const SideNav = () => {
+const SideNav = ({ loggedIn, setLoggedIn }) => {
+
+    const history = useHistory()
+
+    const handleLogout = () => {
+        localStorage.removeItem('jwt')
+        setLoggedIn(false)
+        toast.info("You are logged out", {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        history.push("/")
+    }
 
     return (
         <ProSidebar
@@ -26,6 +46,7 @@ const SideNav = () => {
             </SidebarContent>
             <SidebarFooter style={{ padding: "20px", textAlign: "center", fontWeight: "bold", fontSize: "14px", letterSpacing: "1px" }}>
                 <Link to={`/`}>Back to Info Page</Link><br></br>
+                <NavLink style={{ cursor: "pointer" }} onClick={() => handleLogout()}>Sign Out</NavLink>
             </SidebarFooter>
         </ProSidebar>
     )

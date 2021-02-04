@@ -11,9 +11,12 @@ import Task from './pages/Task';
 import Meditation from './pages/Meditation';
 import { useState } from 'react';
 import { Route } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState("");
+  const [loggedIn, setLoggedIn] = useState(
+    localStorage.getItem('jwt') !== null
+  );
 
   return (
     <div >
@@ -32,7 +35,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav />
+            <SideNav setLoggedIn={setLoggedIn} />
             <Homepage />
           </div>
         </div>
@@ -42,7 +45,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav />
+            <SideNav setLoggedIn={setLoggedIn} />
             <Calendar />
           </div>
         </div>
@@ -52,7 +55,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav />
+            <SideNav setLoggedIn={setLoggedIn} />
             <Task />
           </div>
         </div>
@@ -62,7 +65,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav />
+            <SideNav setLoggedIn={setLoggedIn} />
             <Habit />
           </div>
         </div>
@@ -72,11 +75,13 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav />
+            <SideNav setLoggedIn={setLoggedIn} />
             <Meditation />
           </div>
         </div>
       </Route>
+
+      <ToastContainer />
 
     </div>
   )

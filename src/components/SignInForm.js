@@ -22,8 +22,8 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
         e.preventDefault()
 
         axios({
-            method: 'post',
-            url: '',
+            method: 'POST',
+            url: 'https://insta.nextacademy.com/api/v1/login',
             data: {
                 username: username,
                 password: password
@@ -57,7 +57,7 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
 
     return (
         <div style={{ color: "black" }}>
-            <ModalHeader toggle={toggle}>Log In</ModalHeader>
+            <ModalHeader toggle={toggle}>Sign In</ModalHeader>
             <ModalBody>
                 <Form>
                     <FormGroup>
@@ -75,7 +75,7 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
                 </Form>
             </ModalBody>
             <ModalFooter>
-                <Button color="primary" onClick={handleLogin}>Log In</Button>{' '}
+                <Button color="primary" onClick={handleLogin}>Sign In</Button>{' '}
                 <Button color="secondary" onClick={toggle}>Cancel</Button>
             </ModalFooter>
         </div >

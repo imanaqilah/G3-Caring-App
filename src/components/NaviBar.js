@@ -62,21 +62,17 @@ const NaviBar = ({ loggedIn, setLoggedIn }) => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar style={{ fontWeight: "700", fontSize: "1em" }}>
                         {/* <NavItem>
-                                <NavLink href="/components/">Sign In</NavLink>
-                            </NavItem> */}
-                        <NavItem>
                             <NavLink onClick={() => { history.push("/profile") }}>User Homepage</NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink onClick={() => { toggleModal(); setIsLogin(false) }}>Sign Up</NavLink>
-                        </NavItem>
+                        </NavItem> */}
                         {
                             loggedIn ?
                                 <NavItem>
                                     <NavLink style={{ cursor: "pointer" }} onClick={() => { history.push("/profile") }}>My Profile</NavLink>
                                 </NavItem>
                                 :
-                                null
+                                <NavItem>
+                                    <NavLink onClick={() => { toggleModal(); setIsLogin(false) }}>Sign Up</NavLink>
+                                </NavItem>
                         }
                         <NavItem>
                             {/* LOGIN MODAL */}

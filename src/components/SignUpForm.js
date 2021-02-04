@@ -11,16 +11,18 @@ import { toast } from 'react-toastify';
 import Username from './Username.js';
 import Password from './Password.js';
 import Email from './Email.js';
+import { useHistory } from 'react-router-dom';
 
 const SignUpForm = ({ toggleIsLogin, toggle }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
+    const history = useHistory()
 
     const handleSubmit = () => {
         axios({
             method: 'POST',
-            url: '',
+            url: 'https://insta.nextacademy.com/api/v1/users/',
             data: {
                 username: username,
                 email: email,
@@ -38,6 +40,7 @@ const SignUpForm = ({ toggleIsLogin, toggle }) => {
                     draggable: true,
                     progress: undefined,
                 });
+                history.push("/profile")
             })
             .catch(error => {
                 error.response.data.message.forEach((message) => {
