@@ -75,8 +75,6 @@ const NaviBar = ({ loggedIn, setLoggedIn }) => {
                                 </NavItem>
                         }
                         <NavItem>
-                            {/* LOGIN MODAL */}
-                            {/* <ModalForm isLogin={isLogin} setIsLogin={setIsLogin}>Sign In</ModalForm> */}
                             {
                                 loggedIn ?
                                     <NavLink style={{ cursor: "pointer" }} onClick={() => handleLogout()}>Sign Out</NavLink>

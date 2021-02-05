@@ -1,6 +1,6 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
-import { FaGem, FaHeart, FaChevronLeft } from 'react-icons/fa';
+import { FaUser, FaHeart, FaChevronLeft } from 'react-icons/fa';
 import { Col } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { NavLink } from 'reactstrap';
@@ -35,6 +35,7 @@ const SideNav = ({ loggedIn, setLoggedIn }) => {
             <SidebarContent style={{ fontSize: "10px", letterSpacing: "1px" }}>
                 <Menu iconShape="square">
                     <MenuItem icon={<FaChevronLeft />}><Link to={`/profile`}>Back to Homepage</Link></MenuItem>
+                    <MenuItem icon={<FaUser />}><Link to={`/profile`}>Edit Profile</Link></MenuItem>
                     {/* <MenuItem icon={<FaGem />}>MENU 2</MenuItem>
                     <MenuItem icon={<FaGem />}>MENU 3</MenuItem> */}
                     {/* <SubMenu title="MENU w/ submenu" icon={<FaHeart />}>
