@@ -84,15 +84,6 @@
   padding-right: 15px;
 }
 
-/* .top-bar-text {
-  color: #ffffff;
-  font-weight: 400;
-  text-align: left;
-  display: inline-block;
-} */
-
-
-
 .link-state:visited {
   color: black
 }
@@ -210,24 +201,28 @@
 	}
 }
 
-/******* HOMEPAGE BUTTONS **********/
-
-
-
- /* --- Supposedly this is the solution to my CSS struggle with the sidenav not being able to display proportionately. This has been resolved with another method --- */
-/* .page {
-  display: grid;
-  grid-template-columns: 20vw auto;
-}
-.sidebar {
-  position: fixed;
-  width: 20vw;
-  background: red;
-}
-.main {
-  grid-column-start: 2;
-  background: pink;
+/* .task-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
 } */
 
+.task {
+  margin: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+/* .delete-btn, 
+.edit-btn {
+  justify-content: space-between;
+
+} */
+
+.task-list {
+  min-width: 30%;
+  list-style: none;
+}
 
 

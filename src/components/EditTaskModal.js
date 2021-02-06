@@ -11,32 +11,22 @@ import {
     Input,
 } from 'reactstrap';
 
-const EditTaskModal = () => {
+const EditTaskModal = ({ isOpen, toggle, taskInput, dateInput }) => {
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    const [showModal, setShowModal] = useState(false)
-
-    const toggle = () => setIsOpen(!isOpen);
-
-    const toggleModal = () => {
-        setShowModal(!showModal)
-    }
 
     return (
         <div>
-            <Button color="primary" onClick={() => { toggleModal() }}>Edit Activity</Button>
-            <Modal isOpen={showModal} toggle={toggle}>
-                <ModalHeader toggle={toggle}>Modal title</ModalHeader>
+            <Modal isOpen={isOpen} toggle={toggle}>
+                <ModalHeader toggle={toggle}>Edit Activity</ModalHeader>
                 <ModalBody>
                     <Form>
                         <FormGroup>
-                            <Label for="activity">Activity</Label>
-                            <Input type="activity" name="activity" id="activity" />
+                            <Label for="text">Activity</Label>
+                            <Input type="text" name="text" id="text" value={taskInput} />
                         </FormGroup>
                         <FormGroup>
                             <Label for="date">To be completed by:</Label>
-                            <Input type="date" name="date" id="date" />
+                            <Input type="date" name="date" id="date" value={dateInput} />
                         </FormGroup>
                     </Form>
                 </ModalBody>
