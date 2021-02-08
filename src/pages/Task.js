@@ -23,7 +23,7 @@ import { toast } from 'react-toastify';
 
 const Task = ({ data, setData }) => {
 
-    const [tasks, setTasks] = useState([]);
+    // const [tasks, setTasks] = useState([]);
 
     //  open modal boolean
     const [isOpen, setIsOpen] = useState(false);
@@ -72,7 +72,7 @@ const Task = ({ data, setData }) => {
             allDay: true
         }
 
-        if (titleValue != "") {
+        if (titleValue !== "") {
             // push new data to list
             setData([...data, newData]);
 

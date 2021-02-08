@@ -1,6 +1,5 @@
 import React from 'react';
 import { Col, Row } from 'reactstrap';
-import { Link } from "react-router-dom";
 import { FaKissWinkHeart } from "react-icons/fa";
 
 const InfoPage = (props) => {

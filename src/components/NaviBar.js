@@ -8,11 +8,11 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
+    // UncontrolledDropdown,
+    // DropdownToggle,
+    // DropdownMenu,
+    // DropdownItem,
+    // NavbarText
 } from 'reactstrap';
 import ModalForm from "../components/Modal.js";
 import { toast } from 'react-toastify'
@@ -26,7 +26,7 @@ const NaviBar = ({ loggedIn, setLoggedIn }) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
-    const [nameInput, setNameInput] = useState("");
+    // const [nameInput, setNameInput] = useState("");
 
     const [showModal, setShowModal] = useState(false)
 

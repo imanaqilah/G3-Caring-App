@@ -29,7 +29,7 @@ const CalendarPage = ({ data }) => {
         // set a new empty array
         let newEventList = [];
 
-        data.map(x => {
+        data.forEach(x => {
 
             // create new event data
             let newEventData = {
