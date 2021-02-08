@@ -8,6 +8,7 @@ import { BrowserRouter } from 'react-router-dom';
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
+import 'react-calendar/dist/Calendar.css';
 
 ReactDOM.render(
   <React.StrictMode>

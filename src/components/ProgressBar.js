@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Progress } from 'reactstrap';
 
-const ProgressBar = (props) => {
+const ProgressBar = ({ data }) => {
+
+    const [progressValue, setProgressValue] = useState(0);
+
+    useEffect(() => {
+
+        // this will give the total length of data
+        let total = data.length;
+
+        // this will help filter the new array with only completed data
+        let result = data.filter(x => {
+            return x.isComplete
+        })
+
+        // this will give how many completed task in the data
+        let completeCount = result.length;
+
+        // set the progress value
+        setProgressValue(completeCount / total * 100);
+
+    }, [data]);
 
     return (
         <div className="progress-bar" style={{ paddingLeft: "10px", paddingRight: "10px", paddingTop: "30px", backgroundColor: "inherit" }}>Task Completion Progress
-            <Progress color="info" value={50} style={{ width: "250px" }}>50%</Progress>
+            <Progress color="info" value={progressValue} style={{ width: "250px" }}>{Math.round(progressValue)}%</Progress>
         </div>
     );
 

@@ -18,6 +18,41 @@ function App() {
     localStorage.getItem('jwt') !== null
   );
 
+  const [data, setData] = useState([
+    {
+      id: 1,
+      title: "Do laundry",
+      start: "2021-02-08",
+      end: "2021-02-08",
+      isComplete: true,
+      allDay: true
+    },
+    {
+      id: 2,
+      title: "Feed the turtle",
+      start: "2021-02-08",
+      end: "2021-02-08",
+      isComplete: true,
+      allDay: true
+    },
+    {
+      id: 3,
+      title: "Make juice",
+      start: "2021-02-08",
+      end: "2021-02-08",
+      isComplete: true,
+      allDay: true
+    },
+    {
+      id: 4,
+      title: "Tidy room",
+      start: "2021-02-08",
+      end: "2021-02-08",
+      isComplete: true,
+      allDay: true
+    }
+  ]);
+
   return (
     <div >
       <Route exact path="/">
@@ -35,7 +70,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav setLoggedIn={setLoggedIn} />
+            <SideNav setLoggedIn={setLoggedIn} data={data} />
             <Homepage />
           </div>
         </div>
@@ -45,8 +80,8 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav setLoggedIn={setLoggedIn} />
-            <CalendarPage />
+            <SideNav setLoggedIn={setLoggedIn} data={data} />
+            <CalendarPage data={data} />
           </div>
         </div>
       </Route>
@@ -55,8 +90,8 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav setLoggedIn={setLoggedIn} />
-            <Task />
+            <SideNav setLoggedIn={setLoggedIn} data={data} />
+            <Task data={data} setData={setData} />
           </div>
         </div>
       </Route>
@@ -65,7 +100,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav setLoggedIn={setLoggedIn} />
+            <SideNav setLoggedIn={setLoggedIn} data={data} />
             <Habit />
           </div>
         </div>
@@ -75,7 +110,7 @@ function App() {
         <div className="app">
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
-            <SideNav setLoggedIn={setLoggedIn} />
+            <SideNav setLoggedIn={setLoggedIn} data={data} />
             <Meditation />
           </div>
         </div>

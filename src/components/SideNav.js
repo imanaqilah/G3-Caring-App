@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom';
 import ProgressBar from '../components/ProgressBar.js';
 
-const SideNav = ({ loggedIn, setLoggedIn }) => {
+const SideNav = ({ loggedIn, setLoggedIn, data }) => {
 
     const history = useHistory()
 
@@ -53,7 +53,7 @@ const SideNav = ({ loggedIn, setLoggedIn }) => {
                 </Menu>
                 <div className="App">
                     {/* {testData.map((item, idx) => ( */}
-                    <ProgressBar />
+                    <ProgressBar data={data} />
                     {/* ))} */}
                 </div>
             </SidebarContent>
