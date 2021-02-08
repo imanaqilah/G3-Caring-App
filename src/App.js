@@ -5,7 +5,7 @@ import HelpBar from '../src/components/HelpBar.js';
 import Helpline from './pages/Helpline';
 import InfoPage from './pages/InfoPage';
 import Homepage from './pages/Homepage';
-import Calendar from './pages/Calendar';
+import CalendarPage from './pages/CalendarPage';
 import Habit from './pages/Habit';
 import Task from './pages/Task';
 import Meditation from './pages/Meditation';
@@ -46,7 +46,7 @@ function App() {
           <div className="main">
             {/* Pin SideNav on every page within Homepage for ease of navigation */}
             <SideNav setLoggedIn={setLoggedIn} />
-            <Calendar />
+            <CalendarPage />
           </div>
         </div>
       </Route>

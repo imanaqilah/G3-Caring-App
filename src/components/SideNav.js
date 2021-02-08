@@ -1,11 +1,12 @@
 import { ProSidebar, Menu, MenuItem, SubMenu, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { FaUser, FaHeart, FaChevronLeft } from 'react-icons/fa';
-import { Col } from 'reactstrap';
+import { Col, Label } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { NavLink } from 'reactstrap';
 import { toast } from 'react-toastify'
 import { useHistory } from 'react-router-dom';
+import ProgressBar from '../components/ProgressBar.js';
 
 const SideNav = ({ loggedIn, setLoggedIn }) => {
 
@@ -26,6 +27,12 @@ const SideNav = ({ loggedIn, setLoggedIn }) => {
         history.push("/")
     }
 
+    const testData = [
+        { bgcolor: "#6a1b9a", completed: 60 },
+        // { bgcolor: "#00695c", completed: 30 },
+        // { bgcolor: "#ef6c00", completed: 53 },
+    ];
+
     return (
         <ProSidebar
             breakPoint="sm">
@@ -44,6 +51,11 @@ const SideNav = ({ loggedIn, setLoggedIn }) => {
                     </SubMenu> */}
                     <MenuItem icon={<FaHeart />}><Link to={`/help`}>Find Help</Link></MenuItem>
                 </Menu>
+                <div className="App">
+                    {/* {testData.map((item, idx) => ( */}
+                    <ProgressBar />
+                    {/* ))} */}
+                </div>
             </SidebarContent>
             <SidebarFooter style={{ padding: "20px", textAlign: "center", fontWeight: "bold", fontSize: "14px", letterSpacing: "1px" }}>
                 <Link to={`/`}>Back to Info Page</Link><br></br>

@@ -51,8 +51,16 @@ const Task = () => {
                             <h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Task</h1>
                             <Form>
                                 <FormGroup>
-                                    <Input placeholder="Add a task" />
-                                    <Input type="date" />
+                                    <div className="task-input-form" style={{ marginBottom: "10px" }}>
+                                        <Label for="task">Task:</Label>
+                                        <Input placeholder="Add a task" />
+                                    </div>
+
+                                    <div className="date-input-form">
+                                        <Label for="date">To be completed by:</Label>
+                                        <Input type="date" />
+                                    </div>
+
                                 </FormGroup>
                                 <Button type="submit" color="primary">Add</Button>{' '}
                             </Form>
@@ -62,42 +70,52 @@ const Task = () => {
                 <Container className="task-container" style={{ paddingTop: "30px" }}>
                     <div>
                         <Nav tabs>
-                            <NavItem>
+                            <NavItem style={{ cursor: "pointer" }}>
                                 <NavLink
                                     className={classnames({ active: activeTab === '1' })}
-                                    onClick={() => { toggleTab('1'); }}
-                                >
+                                    onClick={() => { toggleTab('1'); }}>
                                     Incomplete
-                    </NavLink>
+                                </NavLink>
                             </NavItem>
-                            <NavItem>
+                            <NavItem style={{ cursor: "pointer" }}>
                                 <NavLink
                                     className={classnames({ active: activeTab === '2' })}
                                     onClick={() => { toggleTab('2'); }}
                                 >
                                     Completed
-                    </NavLink>
+                                </NavLink>
                             </NavItem>
                         </Nav>
                         <TabContent activeTab={activeTab}>
                             <TabPane tabId="1">
                                 <Row>
-                                    <Col sm="6">
+                                    <Col>
                                         <div className="task">
                                             <div className="task-list"><Input type="checkbox" />Do laundry</div>
-                                            <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
-                                            <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
+                                            <div className="list-btn" style={{ paddingRight: "50px" }}>
+                                                <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
+                                                <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
+                                            </div>
+                                        </div>
+                                        <div className="task">
+                                            <div className="task-list"><Input type="checkbox" />Buy toiletries</div>
+                                            <div className="list-btn" style={{ paddingRight: "50px" }}>
+                                                <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
+                                                <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
+                                            </div>
                                         </div>
                                     </Col>
                                 </Row>
                             </TabPane>
                             <TabPane tabId="2">
                                 <Row>
-                                    <Col sm="6">
+                                    <Col>
                                         <div className="task">
-                                            <div className="task-list"><Input type="checkbox" />Feed the turtle</div>
-                                            <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
-                                            <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
+                                            <div className="task-list"><Input type="checkbox" checked={true} />Feed the turtle</div>
+                                            <div className="list-btn" style={{ paddingRight: "50px" }}>
+                                                <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
+                                                <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
+                                            </div>
                                         </div>
                                     </Col>
                                 </Row>
