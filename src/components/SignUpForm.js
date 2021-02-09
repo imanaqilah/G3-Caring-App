@@ -22,7 +22,7 @@ const SignUpForm = ({ toggleIsLogin, toggle }) => {
     const handleSubmit = () => {
         axios({
             method: 'POST',
-            url: 'https://insta.nextacademy.com/api/v1/users/',
+            url: 'https://caring-app-project2021.herokuapp.com/api/v1/users/ ',
             data: {
                 username: username,
                 email: email,
@@ -31,16 +31,34 @@ const SignUpForm = ({ toggleIsLogin, toggle }) => {
         })
             .then(response => {
                 console.log(response)
-                toast.info(response.data.message, {
-                    position: "top-center",
-                    autoClose: 4000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
-                history.push("/profile")
+                localStorage.setItem('jwt', response.data.token)
+
+                if (response.data.token !== undefined) {
+                    console.log(response.data.token);
+                    toast.info(response.data.message, {
+                        position: "top-center",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    history.push("/profile")
+                }
+                else {
+                    response.data.forEach((message) => {
+                        toast.error(message, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    })
+                }
             })
             .catch(error => {
                 error.response.data.message.forEach((message) => {

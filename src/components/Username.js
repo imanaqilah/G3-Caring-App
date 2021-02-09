@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import {
     FormGroup,
     Label,
@@ -15,18 +14,19 @@ const Username = ({ username, setUsername }) => {
 
     const checkUsername = newUsername => {
         console.log("Making API call to check username!");
-        axios
-            .get(
-                `https://insta.nextacademy.com/api/v1/users/check_name?username=${newUsername}`
-            )
-            .then(response => {
-                console.log(response.data);
-                if (response.data.valid) {
-                    setUsernameValid(true);
-                } else {
-                    setUsernameValid(false);
-                }
-            });
+        setUsernameValid(true);
+        // axios
+        //     .get(
+        //         `https://insta.nextacademy.com/api/v1/users/check_name?username=${newUsername}`
+        //     )
+        //     .then(response => {
+        //         console.log(response.data);
+        //         if (response.data.valid) {
+        //             setUsernameValid(true);
+        //         } else {
+        //             setUsernameValid(false);
+        //         }
+        //     });
     };
 
     const handleUsernameInput = e => {

@@ -23,32 +23,48 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
 
         axios({
             method: 'POST',
-            url: 'https://insta.nextacademy.com/api/v1/login',
+            url: 'https://caring-app-project2021.herokuapp.com/api/v1/sessions/',
             data: {
                 username: username,
                 password: password
             }
         })
             .then(result => {
-                console.log(result)
-                localStorage.setItem('jwt', result.data.auth_token)
-                setLoggedIn(true)
-                setUsername("")
-                setPassword("")
-                toggle()
-                history.push("/profile")
 
-                toast.info(`Welcome back, ${username} !`, {
-                    position: "top-center",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                });
+                // to check if the user logs in successfully
+                if (result.data.token !== undefined) {
+                    console.log(result.data.token);
+                    console.log(result)
+                    localStorage.setItem('jwt', result.data.token)
+                    setLoggedIn(true)
+                    setUsername("")
+                    setPassword("")
+                    toggle()
+                    history.push("/profile")
 
-                localStorage.setItem("user", JSON.stringify(result.data.user))
+                    toast.info('Welcome back!', {
+                        position: "top-center",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                    history.push("/profile")
+                }
+
+                else {
+                    toast.error('Sign in failed. Try again.', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
             })
             .catch(err => {
                 console.log(err)
