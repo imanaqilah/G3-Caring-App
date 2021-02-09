@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Form,
     FormGroup,
@@ -19,11 +19,15 @@ import classnames from 'classnames';
 import { FaPen, FaRegTrashAlt } from "react-icons/fa";
 import Calendar from 'react-calendar';
 import { toast } from 'react-toastify';
+import moment from 'moment';
+import axios from 'axios';
 
 
 const Task = ({ data, setData }) => {
 
-    // const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = useState([]);
+    const [dateValue, setDateValue] = useState(new Date());
+    const [activityValue, setActivityValue] = useState("");
 
     //  open modal boolean
     const [isOpen, setIsOpen] = useState(false);
@@ -40,8 +44,7 @@ const Task = ({ data, setData }) => {
         if (activeTab !== tab) setActiveTab(tab);
     }
 
-    const [dateValue, setDateValue] = useState(new Date());
-    const [titleValue, setTitleValue] = useState("");
+
     // const [isCompleteValue, setIsCompleteValue] = useState(false);
 
     // const toggleIsComplete = (e) => {
@@ -52,43 +55,49 @@ const Task = ({ data, setData }) => {
 
     const taskInputOnChange = (e) => {
         e.preventDefault();
-        setTitleValue(e.target.value);
+        setActivityValue(e.target.value);
     }
 
     const addTaskOnSubmit = (e) => {
         e.preventDefault();
 
-        // this is to get the total count of the data list 
-        let count = data.length;
+        if (activityValue !== "") {
+            // get token from local storage for the API 
+            let token = localStorage.getItem('jwt');
 
-        // next id = count++
-        // create new data
-        let newData = {
-            id: count + 1,
-            title: titleValue,
-            start: dateValue,
-            end: dateValue,
-            isComplete: false,
-            allDay: true
-        }
-
-        if (titleValue !== "") {
-            // push new data to list
-            setData([...data, newData]);
-
+            // POST API when form adds a new task (onSubmit form)
+            console.log(token);
+            axios({
+                method: 'POST',
+                url: 'https://caring-app-project2021.herokuapp.com/api/v1/schemes/',
+                header: {
+                    "Authorization": "Bearer " + token
+                },
+                data: {
+                    activity: activityValue,
+                    date: moment(dateValue).format('YYYY-MM-DD')
+                }
+            })
+                .then(result => {
+                    // check if result.data is empty or not. If not empty, then return the message
+                    if (result.data.activity !== null) {
+                        toast.success(result.data.message, {
+                            position: "top-center",
+                            autoClose: 4000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                        });
+                    }
+                })
+                .catch(err => {
+                    console.log(err)
+                })
             // reset the value on submit
-            setTitleValue("");
+            setActivityValue("");
             setDateValue(new Date());
-
-            toast.success(`New task added successfully`, {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
         }
         else {
             toast.error(`Cannot add an empty task`, {
@@ -104,6 +113,32 @@ const Task = ({ data, setData }) => {
     }
 
 
+    useEffect(() => {
+
+        // getting the username and jwt token from local storage - for API calls
+        let username = localStorage.getItem('username');
+        let token = localStorage.getItem('jwt');
+
+        // calling axios returns user data - activity from this API
+        axios.get(`https://caring-app-project2021.herokuapp.com/api/v1/users/${username}`,
+            {
+                header: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+
+            .then(result => {
+                // once API returns data, check if activity have data, then construct the event list for calendar
+                if (result.data.activity !== null) {
+                    // sets the result.data.activity from the API to our tasks array
+                    setTasks(result.data.activity);
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [tasks]);
+
     return (
         <div className="content">
             <div className="home-background">
@@ -115,7 +150,7 @@ const Task = ({ data, setData }) => {
                                 <FormGroup>
                                     <div className="task-input-form" style={{ marginBottom: "10px" }}>
                                         <Label for="task">Task:</Label>
-                                        <Input type="text" placeholder="Add a task" value={titleValue} onChange={taskInputOnChange} />
+                                        <Input type="text" placeholder="Add a task" value={activityValue} onChange={taskInputOnChange} />
                                     </div>
 
                                     <div className="date-input-form">
@@ -124,6 +159,7 @@ const Task = ({ data, setData }) => {
                                         <Calendar
                                             onChange={setDateValue}
                                             value={dateValue}
+                                            // prevents from picking previous dates 
                                             minDate={new Date()}
                                         />
                                     </div>
@@ -142,7 +178,7 @@ const Task = ({ data, setData }) => {
                                     className={classnames({ active: activeTab === '1' })}
                                     onClick={() => { toggleTab('1'); }}>
                                     Incomplete
-                                </NavLink>
+                                            </NavLink>
                             </NavItem>
                             <NavItem style={{ cursor: "pointer" }}>
                                 <NavLink
@@ -150,7 +186,7 @@ const Task = ({ data, setData }) => {
                                     onClick={() => { toggleTab('2'); }}
                                 >
                                     Completed
-                                </NavLink>
+                                            </NavLink>
                             </NavItem>
                         </Nav>
                         <TabContent activeTab={activeTab}>
@@ -158,12 +194,12 @@ const Task = ({ data, setData }) => {
                                 <Row>
                                     <Col>
                                         {
-                                            data.map(x => {
-                                                if (!x.isComplete) {
+                                            tasks.map(x => {
+                                                if (!x.is_completed) {
                                                     return (
-                                                        <div key={x.id} className="task">
-                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.isComplete} />{x.title}</div>
-                                                            <i>{x.startDate}</i>
+                                                        <div key={x.activity.id} className="task">
+                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.is_completed} />{x.tasks}</div>
+                                                            <i>{moment(x.completion_date).format('MMMM Do YYYY')}</i>
                                                             <div className="list-btn" style={{ paddingRight: "50px" }}>
                                                                 <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
                                                                 <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
@@ -181,12 +217,13 @@ const Task = ({ data, setData }) => {
                                 <Row>
                                     <Col>
                                         {
-                                            data.map(x => {
-                                                if (x.isComplete) {
+                                            tasks.map(x => {
+                                                // Displays only Completed activities
+                                                if (x.is_completed) {
                                                     return (
-                                                        <div key={x.id} className="task">
-                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.isComplete} />{x.title}</div>
-                                                            <i>{x.startDate}</i>
+                                                        <div key={x.activity.id} className="task">
+                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.is_completed} />{x.tasks}</div>
+                                                            <i>{moment(x.completion_date).format('MMMM Do YYYY')}</i>
                                                             <div className="list-btn" style={{ paddingRight: "50px" }}>
                                                                 <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
                                                                 <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
@@ -194,7 +231,9 @@ const Task = ({ data, setData }) => {
                                                         </div>
                                                     )
                                                 }
-                                                else { return (null) }
+                                                else {
+                                                    return (null)
+                                                }
                                             })
                                         }
                                     </Col>
@@ -206,9 +245,6 @@ const Task = ({ data, setData }) => {
                 <EditTaskModal
                     isOpen={isOpen}
                     toggle={toggle}
-
-                // taskInput={testActivity}
-                // dateInput={testDate}
                 />
             </div>
         </div>

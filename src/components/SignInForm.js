@@ -33,9 +33,14 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
 
                 // to check if the user logs in successfully
                 if (result.data.token !== undefined) {
+
+                    // sets the token and username in local storage for API calls on other pages/component
+                    localStorage.setItem('jwt', result.data.token)
+                    localStorage.setItem('username', username)
+
                     console.log(result.data.token);
                     console.log(result)
-                    localStorage.setItem('jwt', result.data.token)
+
                     setLoggedIn(true)
                     setUsername("")
                     setPassword("")
@@ -55,7 +60,7 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
                 }
 
                 else {
-                    toast.error('Sign in failed. Try again.', {
+                    toast.error('Sign In failed. Try again.', {
                         position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: false,

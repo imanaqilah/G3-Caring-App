@@ -30,11 +30,10 @@ const SignUpForm = ({ toggleIsLogin, toggle }) => {
             }
         })
             .then(response => {
-                console.log(response)
-                localStorage.setItem('jwt', response.data.token)
-
                 if (response.data.token !== undefined) {
-                    console.log(response.data.token);
+                    // sets the token and username in local storage for API calls on other pages/component
+                    localStorage.setItem('jwt', response.data.token)
+                    localStorage.setItem('username', username)
                     toast.info(response.data.message, {
                         position: "top-center",
                         autoClose: 4000,

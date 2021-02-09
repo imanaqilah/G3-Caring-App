@@ -2,47 +2,55 @@ import React, { useState, useEffect } from 'react';
 import { Col, Row } from 'reactstrap';
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
+import axios from 'axios';
 
 
 const CalendarPage = ({ data }) => {
 
     const localizer = momentLocalizer(moment)
 
-    const [event, setEventList] = useState([
-        // {
-        //     title: "Do laundry",
-        //     start: "2021-02-01",
-        //     end: "2021-02-01",
-        //     allDay: true
-        // },
-
-        // {
-        //     title: "Feed the turtle",
-        //     start: "2021-02-02",
-        //     end: "2021-02-02",
-        //     allDay: true
-        // }
-    ]);
+    const [event, setEventList] = useState([]);
 
     useEffect(() => {
 
-        // set a new empty array
-        let newEventList = [];
+        // getting the username and jwt token from local storage - for API calls
+        let username = localStorage.getItem('username');
+        let token = localStorage.getItem('jwt');
 
-        data.forEach(x => {
+        // calling axios returns user data - activity from this API
+        axios.get(`https://caring-app-project2021.herokuapp.com/api/v1/users/${username}`,
+            {
+                header: {
+                    "Authorization": "Bearer " + token
+                }
+            })
 
-            // create new event data
-            let newEventData = {
-                title: x.title,
-                start: x.start,
-                end: x.end,
-                allDay: x.allDay
-            }
+            .then(result => {
+                // once API returns data, check if activity have data, then construct the event list for calendar
+                if (result.data.activity !== null) {
+                    // set a new empty array
+                    let newEventList = [];
 
-            newEventList.push(newEventData);
-        });
+                    // event list construct
+                    result.data.activity.forEach(x => {
 
-        setEventList(newEventList);
+                        // create new event data
+                        let newEventData = {
+                            title: x.tasks,
+                            start: moment(x.completion_date).format('YYYY-MM-DD'),
+                            end: moment(x.completion_date).format('YYYY-MM-DD'),
+                            allDay: true
+                        }
+
+                        newEventList.push(newEventData);
+                    });
+
+                    setEventList(newEventList);
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }, [data]);
 
 

@@ -18,40 +18,7 @@ function App() {
     localStorage.getItem('jwt') !== null
   );
 
-  const [data, setData] = useState([
-    {
-      id: 1,
-      title: "Do laundry",
-      start: "2021-02-08",
-      end: "2021-02-08",
-      isComplete: true,
-      allDay: true
-    },
-    {
-      id: 2,
-      title: "Feed the turtle",
-      start: "2021-02-08",
-      end: "2021-02-08",
-      isComplete: true,
-      allDay: true
-    },
-    {
-      id: 3,
-      title: "Make juice",
-      start: "2021-02-08",
-      end: "2021-02-08",
-      isComplete: true,
-      allDay: true
-    },
-    {
-      id: 4,
-      title: "Tidy room",
-      start: "2021-02-08",
-      end: "2021-02-08",
-      isComplete: true,
-      allDay: true
-    }
-  ]);
+  const [data, setData] = useState([]);
 
   return (
     <div >

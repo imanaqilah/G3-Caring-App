@@ -1,7 +1,6 @@
 import { ProSidebar, Menu, MenuItem, SidebarHeader, SidebarFooter, SidebarContent } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { FaUser, FaHeart, FaChevronLeft } from 'react-icons/fa';
-// import { Col, Label } from 'reactstrap';
 import { Link } from "react-router-dom";
 import { NavLink } from 'reactstrap';
 import { toast } from 'react-toastify'
@@ -13,8 +12,12 @@ const SideNav = ({ loggedIn, setLoggedIn, data }) => {
     const history = useHistory()
 
     const handleLogout = () => {
+        // remove the token and username from localstorage when logout
         localStorage.removeItem('jwt')
+        localStorage.removeItem('username')
+
         setLoggedIn(false)
+
         toast.info("You are logged out", {
             position: "top-center",
             autoClose: 5000,
@@ -26,12 +29,6 @@ const SideNav = ({ loggedIn, setLoggedIn, data }) => {
         });
         history.push("/")
     }
-
-    // const testData = [
-    //     { bgcolor: "#6a1b9a", completed: 60 },
-    //     // { bgcolor: "#00695c", completed: 30 },
-    //     // { bgcolor: "#ef6c00", completed: 53 },
-    // ];
 
     return (
         <ProSidebar
