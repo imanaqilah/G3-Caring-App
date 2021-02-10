@@ -34,7 +34,7 @@ const SideNav = ({ loggedIn, setLoggedIn, data }) => {
         <ProSidebar
             breakPoint="sm">
             <SidebarHeader style={{ padding: "24px", textTransform: "uppercase", fontWeight: "bold", fontSize: "14px", letterSpacing: "1px" }}>
-                BRAND NAME
+                Caring App
             </SidebarHeader>
             <SidebarContent style={{ fontSize: "10px", letterSpacing: "1px" }}>
                 <Menu iconShape="square">
