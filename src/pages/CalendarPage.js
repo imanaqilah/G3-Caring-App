@@ -66,7 +66,7 @@ const CalendarPage = ({ data }) => {
         <div className="content">
             <Row>
                 <Col style={box1}>
-                    <h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Calendar</h1>
+                    <h1 style={{ color: "#477991", fontWeight: "bold" }}>Calendar</h1>
 
                     <Calendar
                         localizer={localizer}

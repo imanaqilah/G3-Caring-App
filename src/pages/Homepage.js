@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Col, Row } from 'reactstrap';
-import { FcCalendar, FcTodoList, FcSportsMode, FcCloseUpMode } from "react-icons/fc";
+import { FcCalendar, FcTodoList, FcCloseUpMode } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 const Homepage = () => {
@@ -14,16 +14,16 @@ const Homepage = () => {
             <div className="home-background">
                 <div className="btn-container">
                     <Container fluid={true}>
-                        <Row className="no-gutter" xs="1" sm="2" md="4" lg="4">
+                        <Row className="no-gutter" xs="1" sm="1" md="3" lg="3">
                             <Col>
                                 <button className="btn"><Link to={`/profile/calendar`}><FcCalendar size={btnSize} /></Link></button>
                             </Col>
                             <Col>
                                 <button className="btn"><Link to={`/profile/tasks`}><FcTodoList size={btnSize} /></Link></button>
                             </Col>
-                            <Col>
+                            {/* <Col>
                                 <button className="btn"><Link to={`/profile/habit`}><FcSportsMode size={btnSize} /></Link></button>
-                            </Col>
+                            </Col> */}
                             <Col>
                                 <button className="btn"><Link to={`/profile/meditation`}><FcCloseUpMode size={btnSize} /></Link></button>
                             </Col>

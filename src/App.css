@@ -65,7 +65,8 @@
 
 .top-bar {
   padding: 3px 0;
-  background-color: #72CEC1;
+  /* background-color: #72CEC1; */
+  background-color: #F9D688;
   font-size: 14px;
   font-weight: bold;
   color: #ffffff;
@@ -229,6 +230,10 @@
     color: white !important;
     background-color: #253864 !important;
     border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.color-block-font {
+  color: #EAE2E0 !important
 }
 
 

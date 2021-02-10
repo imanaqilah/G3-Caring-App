@@ -238,7 +238,7 @@ const Task = ({ data, setData }) => {
                 <Container fluid={true} className="form-container" style={{ width: "500px" }}>
                     <Row className="no-gutter">
                         <Col>
-                            <h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Task</h1>
+                            <h1 style={{ color: "#477991", fontWeight: "bold" }}>Task</h1>
                             <Form onSubmit={addTaskOnSubmit}>
                                 <FormGroup>
                                     <div className="task-input-form" style={{ marginBottom: "10px" }}>
@@ -248,7 +248,7 @@ const Task = ({ data, setData }) => {
 
                                     <div className="date-input-form">
                                         <Label for="date">To be completed by:</Label>
-                                        <p style={{ fontWeight: "bold", border: "solid 1px grey" }}>{dateValue.toLocaleDateString()}</p>
+                                        <p style={{ fontWeight: "bold", border: "solid 1px gainsboro", background: "#FFFFFF", padding: "5px", color: "#5776E2", borderRadius: "3px" }}>{dateValue.toLocaleDateString()}</p>
                                         <Calendar
                                             onChange={setDateValue}
                                             value={dateValue}
@@ -342,7 +342,7 @@ const Task = ({ data, setData }) => {
                     refreshTasks={refreshTasks}
                 />
             </div>
-        </div>
+        </div >
     )
 }
 

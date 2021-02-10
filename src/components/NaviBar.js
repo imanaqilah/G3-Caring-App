@@ -54,7 +54,7 @@ const NaviBar = ({ loggedIn, setLoggedIn }) => {
     return (
         <div>
             <Navbar dark expand="lg" style={{ cursor: "pointer", padding: "1em", backgroundColor: "#131313" }}>
-                <NavbarBrand onClick={() => { history.push("/") }}>Brand Logo</NavbarBrand>
+                <NavbarBrand onClick={() => { history.push("/") }}>Caring</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar style={{ fontWeight: "700", fontSize: "1em" }}>

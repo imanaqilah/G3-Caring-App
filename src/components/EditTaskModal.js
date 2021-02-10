@@ -84,6 +84,7 @@ const EditTaskModal = ({ isOpen, toggle, selectedTask, refreshTasks }) => {
                         </FormGroup>
                         <FormGroup>
                             <Label for="date">To be completed by:</Label>
+                            <p style={{ fontWeight: "bold", border: "solid 1px gainsboro", background: "#FFFFFF", padding: "5px", color: "#5776E2", borderRadius: "3px" }}>{dateValue.toLocaleDateString()}</p>
                             <Calendar
                                 onChange={setDateValue}
                                 value={dateValue}
