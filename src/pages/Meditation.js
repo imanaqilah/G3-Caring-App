@@ -17,7 +17,7 @@ const Meditation = () => {
         <div className="content">
             <Row>
                 <Col style={box1}>
-                    <GiMeditation size="100" /><h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Meditation</h1>
+                    <GiMeditation size="100" /><h1 style={{ color: "#F0C38E", fontWeight: "bold" }}>Meditation - Coming Soon!</h1>
                 </Col>
             </Row>
         </div>
