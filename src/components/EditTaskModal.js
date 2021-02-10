@@ -22,6 +22,7 @@ const EditTaskModal = ({ isOpen, toggle, selectedTask, refreshTasks }) => {
     const [activityValue, setActivityValue] = useState("");
 
     useEffect(() => {
+        console.log(selectedTask);
         setDateValue(new Date(selectedTask.completion_date))
         setActivityValue(selectedTask.tasks)
     },
@@ -91,11 +92,11 @@ const EditTaskModal = ({ isOpen, toggle, selectedTask, refreshTasks }) => {
                             />
                         </FormGroup>
                     </ModalBody>
+                    <ModalFooter>
+                        <Button color="primary" type="submit">Update</Button>{' '}
+                        <Button color="secondary" onClick={toggle}>Cancel</Button>
+                    </ModalFooter>
                 </Form>
-                <ModalFooter>
-                    <Button color="primary" type="submit" onClick={toggle}>Update</Button>{' '}
-                    <Button color="secondary" onClick={toggle}>Cancel</Button>
-                </ModalFooter>
             </Modal>
         </div>
 
