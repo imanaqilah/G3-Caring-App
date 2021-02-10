@@ -38,16 +38,11 @@ const SignInForm = ({ toggleIsLogin, toggle, setLoggedIn }) => {
                     localStorage.setItem('jwt', result.data.token)
                     localStorage.setItem('username', username)
 
-                    console.log(result.data.token);
-                    console.log(result)
-
                     setLoggedIn(true)
                     setUsername("")
                     setPassword("")
                     toggle()
-                    history.push("/profile")
-
-                    toast.info('Welcome back!', {
+                    toast.info(`Welcome back, ${username}!`, {
                         position: "top-center",
                         autoClose: 4000,
                         hideProgressBar: false,

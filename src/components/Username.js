@@ -13,20 +13,8 @@ const Username = ({ username, setUsername }) => {
     const [usernameValid, setUsernameValid] = useState("");
 
     const checkUsername = newUsername => {
-        console.log("Making API call to check username!");
+        // console.log("Making API call to check username!");
         setUsernameValid(true);
-        // axios
-        //     .get(
-        //         `https://insta.nextacademy.com/api/v1/users/check_name?username=${newUsername}`
-        //     )
-        //     .then(response => {
-        //         console.log(response.data);
-        //         if (response.data.valid) {
-        //             setUsernameValid(true);
-        //         } else {
-        //             setUsernameValid(false);
-        //         }
-        //     });
     };
 
     const handleUsernameInput = e => {

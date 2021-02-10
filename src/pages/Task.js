@@ -29,13 +29,17 @@ const Task = ({ data, setData }) => {
     const [dateValue, setDateValue] = useState(new Date());
     const [activityValue, setActivityValue] = useState("");
 
+    const [selectedTask, setSelectedTask] = useState("");
+
     //  open modal boolean
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
 
-    const openEditForm = () => {
+    const openEditForm = (e, selectedTask) => {
+        e.preventDefault();
         setIsOpen(!isOpen);
+        setSelectedTask(selectedTask)
     }
 
     // Incomplete & Completed tabs
@@ -44,14 +48,79 @@ const Task = ({ data, setData }) => {
         if (activeTab !== tab) setActiveTab(tab);
     }
 
+    const toggleIsComplete = (e, selectedTask) => {
+        e.preventDefault();
 
-    // const [isCompleteValue, setIsCompleteValue] = useState(false);
+        let token = localStorage.getItem('jwt');
 
-    // const toggleIsComplete = (e) => {
-    //     e.preventDefault();
-    //     setIsCompleteValue(e.target.value);
-    // }
+        let updateBool = "off";
 
+        if (!selectedTask.is_completed) {
+            updateBool = "on";
+        }
+
+        axios({
+            method: 'POST',
+            url: `https://caring-app-project2021.herokuapp.com/api/v1/schemes/${selectedTask.activity_id}/update`,
+            headers: {
+                "Authorization": "Bearer " + token
+            },
+            data: {
+                activity: selectedTask.tasks,
+                date: moment(selectedTask.completion_date).format('YYYY-MM-DD'),
+                completed: updateBool
+            }
+        })
+            .then(result => {
+                // check if result.data is empty or not. If not empty, then return the message
+                if (result.data !== undefined) {
+                    refreshTasks();
+                    toast.success(result.data.message, {
+                        position: "top-center",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+
+    const onClickDeleteTask = (e, activity_id) => {
+        e.preventDefault();
+
+        let token = localStorage.getItem('jwt');
+
+        axios({
+            method: 'POST',
+            url: `https://caring-app-project2021.herokuapp.com/api/v1/schemes/${activity_id}/delete`,
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        })
+            .then(result => {
+                if (result.data !== undefined) {
+                    refreshTasks();
+                    toast.success(result.data.message, {
+                        position: "top-center",
+                        autoClose: 4000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                }
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
 
     const taskInputOnChange = (e) => {
         e.preventDefault();
@@ -66,11 +135,10 @@ const Task = ({ data, setData }) => {
             let token = localStorage.getItem('jwt');
 
             // POST API when form adds a new task (onSubmit form)
-            console.log(token);
             axios({
                 method: 'POST',
                 url: 'https://caring-app-project2021.herokuapp.com/api/v1/schemes/',
-                header: {
+                headers: {
                     "Authorization": "Bearer " + token
                 },
                 data: {
@@ -80,7 +148,8 @@ const Task = ({ data, setData }) => {
             })
                 .then(result => {
                     // check if result.data is empty or not. If not empty, then return the message
-                    if (result.data.activity !== null) {
+                    if (result.data !== undefined) {
+                        refreshTasks();
                         toast.success(result.data.message, {
                             position: "top-center",
                             autoClose: 4000,
@@ -114,7 +183,6 @@ const Task = ({ data, setData }) => {
 
 
     useEffect(() => {
-
         // getting the username and jwt token from local storage - for API calls
         let username = localStorage.getItem('username');
         let token = localStorage.getItem('jwt');
@@ -122,14 +190,14 @@ const Task = ({ data, setData }) => {
         // calling axios returns user data - activity from this API
         axios.get(`https://caring-app-project2021.herokuapp.com/api/v1/users/${username}`,
             {
-                header: {
+                headers: {
                     "Authorization": "Bearer " + token
                 }
             })
 
             .then(result => {
                 // once API returns data, check if activity have data, then construct the event list for calendar
-                if (result.data.activity !== null) {
+                if (result.data.activity !== undefined) {
                     // sets the result.data.activity from the API to our tasks array
                     setTasks(result.data.activity);
                 }
@@ -137,7 +205,32 @@ const Task = ({ data, setData }) => {
             .catch(error => {
                 console.log(error)
             })
-    }, [tasks]);
+    });
+
+    const refreshTasks = () => {
+        let username = localStorage.getItem('username');
+        let token = localStorage.getItem('jwt');
+        axios.get(`https://caring-app-project2021.herokuapp.com/api/v1/users/${username}`,
+            {
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            })
+
+            .then(result => {
+                // once API returns data, check if activity have data, then construct the event list for calendar
+                if (result.data.activity !== undefined) {
+                    // sets the result.data.activity from the API to our tasks array
+                    setTasks(result.data.activity);
+                }
+                else {
+                    setTasks([]);
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     return (
         <div className="content">
@@ -197,11 +290,11 @@ const Task = ({ data, setData }) => {
                                             tasks.map(x => {
                                                 if (!x.is_completed) {
                                                     return (
-                                                        <div key={x.activity.id} className="task">
-                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.is_completed} />{x.tasks}</div>
+                                                        <div key={x.activity_id} className="task">
+                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.is_completed} onChange={(e) => { toggleIsComplete(e, x) }} />{x.tasks}</div>
                                                             <i>{moment(x.completion_date).format('MMMM Do YYYY')}</i>
                                                             <div className="list-btn" style={{ paddingRight: "50px" }}>
-                                                                <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
+                                                                <Button className="delete-btn" type="delete" color="danger" onClick={(e) => { onClickDeleteTask(e, x.activity_id) }} ><FaRegTrashAlt /></Button>{' '}
                                                                 <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
                                                             </div>
                                                         </div>
@@ -221,11 +314,11 @@ const Task = ({ data, setData }) => {
                                                 // Displays only Completed activities
                                                 if (x.is_completed) {
                                                     return (
-                                                        <div key={x.activity.id} className="task">
-                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.is_completed} />{x.tasks}</div>
+                                                        <div key={x.activity_id} className="task">
+                                                            <div className="task-list"><Input type="checkbox" defaultChecked={x.is_completed} onChange={(e) => { toggleIsComplete(e, x) }} />{x.tasks}</div>
                                                             <i>{moment(x.completion_date).format('MMMM Do YYYY')}</i>
                                                             <div className="list-btn" style={{ paddingRight: "50px" }}>
-                                                                <Button className="delete-btn" type="delete" color="danger"><FaRegTrashAlt /></Button>{' '}
+                                                                <Button className="delete-btn" type="delete" color="danger" onClick={(e) => { onClickDeleteTask(e, x.activity_id) }}><FaRegTrashAlt /></Button>{' '}
                                                                 <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
                                                             </div>
                                                         </div>
@@ -245,6 +338,8 @@ const Task = ({ data, setData }) => {
                 <EditTaskModal
                     isOpen={isOpen}
                     toggle={toggle}
+                    selectedTask={selectedTask}
+                    refreshTasks={refreshTasks}
                 />
             </div>
         </div>

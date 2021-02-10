@@ -20,14 +20,14 @@ const CalendarPage = ({ data }) => {
         // calling axios returns user data - activity from this API
         axios.get(`https://caring-app-project2021.herokuapp.com/api/v1/users/${username}`,
             {
-                header: {
+                headers: {
                     "Authorization": "Bearer " + token
                 }
             })
 
             .then(result => {
                 // once API returns data, check if activity have data, then construct the event list for calendar
-                if (result.data.activity !== null) {
+                if (result.data.activity !== undefined) {
                     // set a new empty array
                     let newEventList = [];
 
@@ -51,7 +51,7 @@ const CalendarPage = ({ data }) => {
             .catch(error => {
                 console.log(error)
             })
-    }, [data]);
+    }, []);
 
 
     const box1 = {

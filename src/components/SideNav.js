@@ -40,18 +40,12 @@ const SideNav = ({ loggedIn, setLoggedIn, data }) => {
                 <Menu iconShape="square">
                     <MenuItem icon={<FaChevronLeft />}><Link to={`/profile`}>Back to Homepage</Link></MenuItem>
                     <MenuItem icon={<FaUser />}><Link to={`/profile`}>Edit Profile</Link></MenuItem>
-                    {/* <MenuItem icon={<FaGem />}>MENU 2</MenuItem>
-                    <MenuItem icon={<FaGem />}>MENU 3</MenuItem> */}
-                    {/* <SubMenu title="MENU w/ submenu" icon={<FaHeart />}>
-                        <MenuItem>Sub Menu 1</MenuItem>
-                        <MenuItem>Sub Menu 2</MenuItem>
-                    </SubMenu> */}
                     <MenuItem icon={<FaHeart />}><Link to={`/help`}>Find Help</Link></MenuItem>
                 </Menu>
                 <div className="App">
-                    {/* {testData.map((item, idx) => ( */}
+
                     <ProgressBar data={data} />
-                    {/* ))} */}
+
                 </div>
             </SidebarContent>
             <SidebarFooter style={{ padding: "20px", textAlign: "center", fontWeight: "bold", fontSize: "14px", letterSpacing: "1px" }}>

@@ -26,8 +26,6 @@ const NaviBar = ({ loggedIn, setLoggedIn }) => {
 
     const toggle = () => setIsOpen(!isOpen);
 
-    // const [nameInput, setNameInput] = useState("");
-
     const [showModal, setShowModal] = useState(false)
 
     const toggleModal = () => {
@@ -35,7 +33,6 @@ const NaviBar = ({ loggedIn, setLoggedIn }) => {
     }
 
     const toggleIsLogin = () => {
-        console.log(isLogin);
         setIsLogin(!isLogin)
     }
 
