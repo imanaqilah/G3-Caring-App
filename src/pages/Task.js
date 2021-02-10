@@ -319,7 +319,7 @@ const Task = ({ data, setData }) => {
                                                             <i>{moment(x.completion_date).format('MMMM Do YYYY')}</i>
                                                             <div className="list-btn" style={{ paddingRight: "50px" }}>
                                                                 <Button className="delete-btn" type="delete" color="danger" onClick={(e) => { onClickDeleteTask(e, x.activity_id) }}><FaRegTrashAlt /></Button>{' '}
-                                                                <Button className="edit-btn" type="edit" color="primary" onClick={openEditForm}><FaPen /></Button>{' '}
+                                                                <Button className="edit-btn" type="edit" color="primary" onClick={(e) => { openEditForm(e, x) }}><FaPen /></Button>{' '}
                                                             </div>
                                                         </div>
                                                     )
