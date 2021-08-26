@@ -1,3 +1,12 @@
+Caring App is a collaborative final project as part of the syllabus during my 10-week intensive coding bootcamp (full-stack web dev). We were given 2 weeks to complete this project. The theme was "Hacking Lockdown" and we were free to choose what we want to build based on the given theme. Caring webapp aimed to bring awareness and promote self-care to improve one's mental health especially during the lockdown (MCO) when mental health issues were on the rise. 
+
+This prototype includes the following feature: 
+- daily task planner 
+- calendar overview
+- meditation guide
+
+I was responsible in the whole design and front-end aspect while three of my teammates were responsible in the back-end aspect.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
