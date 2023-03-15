@@ -1,3 +1,5 @@
+Visit https://caring-project2021.netlify.app to view this project :) 
+
 Caring App is a collaborative final project as part of the syllabus during my 10-week intensive coding bootcamp (full-stack web dev). We were given 2 weeks to complete this project. The theme was "Hacking Lockdown" and we were free to choose what we want to build based on the given theme. Caring webapp aimed to bring awareness and promote self-care to improve one's mental health especially during the lockdown (MCO) when mental health issues were on the rise. 
 
 This prototype includes the following feature: 
